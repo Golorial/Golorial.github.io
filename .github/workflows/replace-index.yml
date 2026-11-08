@@ -1,0 +1,22 @@
+name: Replace index.html with updated homepage
+on:
+  push:
+    paths:
+      - '.github/workflows/replace-index.yml'
+permissions:
+  contents: write
+jobs:
+  replace:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Replace index.html with updated homepage
+        run: |
+          if [ -f luo-li-ge-ren-zhu-ye.html ]; then
+            git config user.name "Golorial"
+            git config user.email "Golorial@users.noreply.github.com"
+            git rm -q index.html
+            git mv luo-li-ge-ren-zhu-ye.html index.html
+            git commit -m "Replace index.html with updated homepage (Google Analytics)"
+            git push
+          fi
